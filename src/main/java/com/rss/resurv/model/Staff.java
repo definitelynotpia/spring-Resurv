@@ -4,8 +4,8 @@ public class Staff extends User{
     // staff views, edits only
     public int staffId;
 
-    public Staff(int userId, String firstname, String lastname, String password, String email, int staffId) {
-        super(userId, firstname, lastname, password, email);
+    public Staff(int userId, String firstName, String lastName, String password, String email, int staffId) {
+        super(userId, firstName, lastName, password, email);
         this.staffId = staffId;
     }
 

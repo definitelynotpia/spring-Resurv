@@ -1,21 +1,31 @@
 package com.rss.resurv.model;
 
-import java.util.HashMap;
-import java.util.Map;
+import javax.persistence.*;
+import java.util.*;
 
+@Entity
+@Table(name = "Customers")
 public class Customer extends User {
-    private int customerId;
+    // autoincrement UUID primary key
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private UUID customerId;
+    // Reservation foreign key (one customer, many reservations)
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "customer")
+    private List<Reservation> reservationList;
 
-    public Customer(int customerId, int userId, String firstName, String lastName, String password, String email) {
-        super(userId, firstName, lastName, password, email);
-        this.customerId = customerId;
+    // customer constructor
+    public Customer(String firstName, String lastName, String password, String email) {
+        // use constructor from parent class
+        super(firstName, lastName, password, email);
     }
 
-    public int getCustomerId() {
+    // getters and setters
+    public UUID getCustomerId() {
         return customerId;
     }
-
-    public void setCustomerId(int customerId) {
+    public void setCustomerId(UUID customerId) {
         this.customerId = customerId;
     }
+    public List<Reservation> getReservationList() { return reservationList; }
+    public void setReservationList(List<Reservation> reservationList) { this.reservationList = reservationList; }
 }

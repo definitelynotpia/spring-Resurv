@@ -1,19 +1,27 @@
 package com.rss.resurv.model;
 
-public class Manager extends User {
-    // can view, edit, delete
-    public int managerId;
+import javax.persistence.*;
+import java.util.UUID;
 
-    public Manager(int userId, String firstName, String lastName, String password, String email, int managerId) {
-        super(userId, firstName, lastName, password, email);
-        this.managerId = managerId;
+@Entity
+@Table(name = "Managers")
+public class Manager extends User {
+    // autoincrement UUID primary key
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    public UUID managerId;
+    // can view, edit, delete
+
+    // manager constructor
+    public Manager(String firstName, String lastName, String password, String email) {
+        // use constructor from parent class
+        super(firstName, lastName, password, email);
     }
 
-    public int getManagerId() {
+    // getters and setters
+    public UUID getManagerId() {
         return managerId;
     }
-
-    public void setManagerId(int managerId) {
+    public void setManagerId(UUID managerId) {
         this.managerId = managerId;
     }
 }

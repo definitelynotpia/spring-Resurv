@@ -5,6 +5,7 @@ import com.rss.resurv.model.Customer;
 import com.rss.resurv.repository.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
@@ -22,9 +23,17 @@ public class CustomerController {
     @Autowired // parent class
     private CustomerRepository customerRepository;
 
+
+
     // get all Customers
     @GetMapping("")
     public List<Customer> getAllCustomers() { return customerRepository.findAll(); }
+
+    @GetMapping("/")
+    public String index(Model model){
+        model.addAttribute("message", "Hello World");
+        return "home";
+    }
 
     // get Customers by id
     @GetMapping("{id}")

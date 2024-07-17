@@ -8,14 +8,11 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.InheritanceType;
 import jakarta.persistence.Column;
 
-
-import java.util.UUID;
-
 @Entity
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public class User {
 
-    // autoincrement UUID primary key
+    // autoincrement Long primary key
     @Id
     @GeneratedValue(strategy = GenerationType.TABLE)
     private Long userId;

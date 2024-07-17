@@ -2,8 +2,6 @@ package com.rss.resurv.model;
 
 import jakarta.persistence.*;
 
-import java.util.UUID;
-
 
 @Entity
 @Table(name = "staffs")

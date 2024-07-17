@@ -2,11 +2,9 @@ package com.rss.resurv.model;
 
 import jakarta.persistence.*;
 
-import java.util.UUID;
-
 
 @Entity
-@Table(name = "Reservations")
+@Table(name = "reservations")
 public class Reservation {
     // autoincrement UUID primary key
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -14,17 +12,17 @@ public class Reservation {
 
     // Customer foreign key (one customer, many reservations)
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "userId", referencedColumnName = "userId")
+    @JoinColumn(name = "user_id", referencedColumnName = "customer_id")
     private Customer customer;
 
     // entity attributes
-    @Column(nullable = false, unique = true, name = "tableNo")
+    @Column(nullable = false, unique = true, name = "table_no")
     private int tableNo;
     @Column(nullable = false, length = 2, name = "pax")
     private int pax;
-    @Column(nullable = false, name = "creationTimestamp")
+    @Column(nullable = false, name = "creation_timestamp")
     private String creationTimestamp; // creation time
-    @Column(nullable = false, name = "reservationTimestamp")
+    @Column(nullable = false, name = "reservation_timestamp")
     private String reservationTimestamp; // date time
 
     // reservation constructor

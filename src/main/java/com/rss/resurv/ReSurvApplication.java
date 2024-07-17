@@ -12,6 +12,7 @@ public class ReSurvApplication {
     public static void main(String[] args) {
         SpringApplication.run(ReSurvApplication.class, args);
     }
+
     @Bean
     public WebMvcConfigurer configure() {
         return new WebMvcConfigurer() {

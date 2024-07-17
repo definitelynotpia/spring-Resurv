@@ -1,17 +1,20 @@
 package com.rss.resurv.model;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
+
 import java.util.UUID;
+
 
 @Entity
 @Table(name = "Reservations")
 public class Reservation {
     // autoincrement UUID primary key
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private UUID reservationId;
+    private Long reservationId;
+
     // Customer foreign key (one customer, many reservations)
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "customerId", referencedColumnName = "customerId")
+    @JoinColumn(name = "userId", referencedColumnName = "userId")
     private Customer customer;
 
     // entity attributes
@@ -25,7 +28,7 @@ public class Reservation {
     private String reservationTimestamp; // date time
 
     // reservation constructor
-    public Reservation(UUID reservationId, int tableNo, Customer customer, int pax, String timestamp, String reservationTimestamp) {
+    public Reservation(Long reservationId, int tableNo, Customer customer, int pax, String timestamp, String reservationTimestamp) {
         this.reservationId = reservationId;
         this.tableNo = tableNo;
         this.customer = customer;
@@ -34,11 +37,15 @@ public class Reservation {
         this.reservationTimestamp = reservationTimestamp;
     }
 
+    public Reservation() {
+
+    }
+
     // getters and setters
-    public UUID getReservationId() {
+    public Long getReservationId() {
         return reservationId;
     }
-    public void setReservationId(UUID reservationId) {
+    public void setReservationId(Long reservationId) {
         this.reservationId = reservationId;
     }
     public int getTableNo() {

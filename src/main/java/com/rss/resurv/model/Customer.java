@@ -1,14 +1,17 @@
 package com.rss.resurv.model;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
+
 import java.util.*;
 
+
 @Entity
-@Table(name = "Customers")
+@Table(name = "customers")
 public class Customer extends User {
-    // autoincrement UUID primary key
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private UUID customerId;
+
+    // autoincrement Long primary key
+    private Long customerId;
+
     // Reservation foreign key (one customer, many reservations)
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "customer")
     private List<Reservation> reservationList;
@@ -19,11 +22,15 @@ public class Customer extends User {
         super(firstName, lastName, password, email);
     }
 
+    public Customer() {
+
+    }
+
     // getters and setters
-    public UUID getCustomerId() {
+    public Long getCustomerId() {
         return customerId;
     }
-    public void setCustomerId(UUID customerId) {
+    public void setCustomerId(Long customerId) {
         this.customerId = customerId;
     }
     public List<Reservation> getReservationList() { return reservationList; }

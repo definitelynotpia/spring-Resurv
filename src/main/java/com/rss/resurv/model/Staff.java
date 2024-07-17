@@ -1,16 +1,16 @@
 package com.rss.resurv.model;
 
-import org.springframework.web.bind.annotation.GetMapping;
+import jakarta.persistence.*;
 
-import javax.persistence.*;
 import java.util.UUID;
 
+
 @Entity
-@Table(name = "Staffs")
+@Table(name = "staffs")
 public class Staff extends User{
-    // autoincrement UUID primary key
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public UUID staffId;
+    // autoincrement Long primary key
+
+    public Long staffId;
     // staff views, edits only
 
     // staff constructor
@@ -19,9 +19,13 @@ public class Staff extends User{
         super(firstName, lastName, password, email);
     }
 
+    public Staff() {
+
+    }
+
     // getters and setters
-    public UUID getStaffId() { return staffId; }
-    public void setStaffId(UUID staffId) {
+    public Long getStaffId() { return staffId; }
+    public void setStaffId(Long staffId) {
         this.staffId = staffId;
     }
 }

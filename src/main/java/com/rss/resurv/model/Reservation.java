@@ -12,7 +12,7 @@ public class Reservation {
 
     // Customer foreign key (one customer, many reservations)
     @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "user_id", referencedColumnName = "customer_id")
+    @JoinColumn(name = "userId", referencedColumnName = "userId")
     private Customer customer;
 
     // entity attributes

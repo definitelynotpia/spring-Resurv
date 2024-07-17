@@ -16,7 +16,7 @@ public class Reservation {
     private Customer customer;
 
     // entity attributes
-    @Column(nullable = false, unique = true, name = "table_no")
+    @Column(nullable = false, name = "table_no")
     private int tableNo;
     @Column(nullable = false, length = 2, name = "pax")
     private int pax;

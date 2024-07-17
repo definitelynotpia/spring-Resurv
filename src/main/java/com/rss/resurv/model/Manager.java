@@ -9,6 +9,7 @@ import java.util.UUID;
 @Table(name = "managers")
 public class Manager extends User {
 
+    @Column(nullable = false)
     public Long managerId;
     // can view, edit, delete
 

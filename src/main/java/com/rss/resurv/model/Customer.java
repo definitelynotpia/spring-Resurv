@@ -10,6 +10,7 @@ import java.util.*;
 public class Customer extends User {
 
     // autoincrement Long primary key
+    @Column(nullable = false)
     private Long customerId;
 
     // Reservation foreign key (one customer, many reservations)

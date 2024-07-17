@@ -10,6 +10,7 @@ import java.util.UUID;
 public class Staff extends User{
     // autoincrement Long primary key
 
+    @Column(nullable = false)
     public Long staffId;
     // staff views, edits only
 

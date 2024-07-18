@@ -37,7 +37,7 @@ public class ReservationController {
     }
 
     // create new Reservation
-    @PostMapping("/ReSurv/register")
+    @PostMapping("/ReSurv/reserve")
     Reservation createReservation(@RequestBody Reservation reservation) { return reservationRepository.save(reservation); }
 
     // delete existing Reservation
@@ -74,7 +74,7 @@ public class ReservationController {
         // get reservation and customer objects, else if not exists, throw exceptions
         Reservation reservation = reservationRepository.findById(reservationId)
                 .orElseThrow(() -> new ResourceNotFoundException("Reservation with id " + reservationId + " does not exist."));
-        Customer customer = customerRepository.findById(Math.toIntExact(customerId))
+        Customer customer = customerRepository.findById(customerId)
                 .orElseThrow(() -> new ResourceNotFoundException("Customer with id " + customerId + " does not exist."));
         // set customer attribute of reservation
         reservation.setCustomer(customer);

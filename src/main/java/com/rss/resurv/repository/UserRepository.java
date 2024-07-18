@@ -5,5 +5,5 @@
 //
 //import java.util.UUID;
 //
-//public interface UserRepository extends JpaRepository<User, UUID> {
+//public interface UserRepository extends JpaRepository<User, Long> {
 //}

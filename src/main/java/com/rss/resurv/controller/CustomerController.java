@@ -33,7 +33,7 @@ public class CustomerController {
     @GetMapping("{id}")
     public ResponseEntity<Customer> getCustomerById(@PathVariable Long id) {
         // get customer if exists; else, throw exception
-        Customer customer = customerRepository.findById(Math.toIntExact(id))
+        Customer customer = customerRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Customer with id " + id + " does not exist."));
         return ResponseEntity.ok(customer);
     }
@@ -46,7 +46,7 @@ public class CustomerController {
     @DeleteMapping("{id}")
     public ResponseEntity<Map<String, Boolean>> deleteCustomer(@PathVariable Long id) {
         // get customer if exists; else, throw exception
-        Customer customer = customerRepository.findById(Math.toIntExact(id))
+        Customer customer = customerRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Customer with id " + id + " does not exist."));
         // delete customer
         customerRepository.delete(customer);
@@ -59,7 +59,7 @@ public class CustomerController {
     @PutMapping("/{id}")
     public ResponseEntity<Customer> updateCustomer(@PathVariable Long id, @RequestBody Customer customerData) {
         // get customer if exists; else, throw exception
-        Customer customer = customerRepository.findById(Math.toIntExact(id))
+        Customer customer = customerRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Customer with id " + id + " does not exist."));
         // update customer attributes
         customer.setEmail(customerData.getEmail());

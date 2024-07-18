@@ -29,7 +29,7 @@ public class ReservationController {
 
     // get Reservations by id
     @GetMapping("{id}")
-    public ResponseEntity<Reservation> getReservationById(@PathVariable UUID id) {
+    public ResponseEntity<Reservation> getReservationById(@PathVariable Long id) {
         // get reservation if exists; else, throw exception
         Reservation reservation = reservationRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Reservation with id " + id + " does not exist."));
@@ -42,7 +42,7 @@ public class ReservationController {
 
     // delete existing Reservation
     @DeleteMapping("{id}")
-    public ResponseEntity<Map<String, Boolean>> deleteReservation(@PathVariable UUID id) {
+    public ResponseEntity<Map<String, Boolean>> deleteReservation(@PathVariable Long id) {
         // get reservation if exists; else, throw exception
         Reservation reservation = reservationRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Reservation with id " + id + " does not exist."));
@@ -55,7 +55,7 @@ public class ReservationController {
 
     // update Reservation
     @PutMapping("/{id}")
-    public ResponseEntity<Reservation> updateReservation(@PathVariable UUID id, @RequestBody Reservation reservationData) {
+    public ResponseEntity<Reservation> updateReservation(@PathVariable Long id, @RequestBody Reservation reservationData) {
         // get reservation if exists; else, throw exception
         Reservation reservation = reservationRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Reservation with id " + id + " does not exist."));
@@ -70,7 +70,7 @@ public class ReservationController {
 
     // one-to-many relationship (one customer can have many reservations)
     @PutMapping("/{customerId}/{reservationId}")
-    Reservation setCustomerToReservation(@PathVariable UUID reservationId, @PathVariable Long customerId) {
+    Reservation setCustomerToReservation(@PathVariable Long reservationId, @PathVariable Long customerId) {
         // get reservation and customer objects, else if not exists, throw exceptions
         Reservation reservation = reservationRepository.findById(reservationId)
                 .orElseThrow(() -> new ResourceNotFoundException("Reservation with id " + reservationId + " does not exist."));

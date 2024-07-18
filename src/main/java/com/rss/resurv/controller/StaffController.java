@@ -28,7 +28,7 @@ public class StaffController {
 
     // get Staffs by id
     @GetMapping("{id}")
-    public ResponseEntity<Staff> getStaffById(@PathVariable UUID id) {
+    public ResponseEntity<Staff> getStaffById(@PathVariable Long id) {
         // get staff if exists; else, throw exception
         Staff staff = staffRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Staff with id " + id + " does not exist."));
@@ -36,12 +36,12 @@ public class StaffController {
     }
 
     // create new Staff
-    @PostMapping("/ReSurv/register")
+    @PostMapping("/ReSurv/staff/register")
     Staff createStaff(@RequestBody Staff staff) { return staffRepository.save(staff); }
 
     // delete existing Staff
     @DeleteMapping("{id}")
-    public ResponseEntity<Map<String, Boolean>> deleteStaff(@PathVariable UUID id) {
+    public ResponseEntity<Map<String, Boolean>> deleteStaff(@PathVariable Long id) {
         // get staff if exists; else, throw exception
         Staff staff = staffRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Staff with id " + id + " does not exist."));
@@ -54,7 +54,7 @@ public class StaffController {
 
     // update Staff
     @PutMapping("/{id}")
-    public ResponseEntity<Staff> updateStaff(@PathVariable UUID id, @RequestBody Staff staffData) {
+    public ResponseEntity<Staff> updateStaff(@PathVariable Long id, @RequestBody Staff staffData) {
         // get staff if exists; else, throw exception
         Staff staff = staffRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Staff with id " + id + " does not exist."));

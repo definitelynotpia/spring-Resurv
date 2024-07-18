@@ -28,7 +28,7 @@ public class ManagerController {
 
     // get Managers by id
     @GetMapping("{id}")
-    public ResponseEntity<Manager> getManagerById(@PathVariable UUID id) {
+    public ResponseEntity<Manager> getManagerById(@PathVariable Long id) {
         // get manager if exists; else, throw exception
         Manager manager = managerRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Manager with id " + id + " does not exist."));
@@ -41,7 +41,7 @@ public class ManagerController {
 
     // delete existing Manager
     @DeleteMapping("{id}")
-    public ResponseEntity<Map<String, Boolean>> deleteManager(@PathVariable UUID id) {
+    public ResponseEntity<Map<String, Boolean>> deleteManager(@PathVariable Long id) {
         // get manager if exists; else, throw exception
         Manager manager = managerRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Manager with id " + id + " does not exist."));
@@ -54,7 +54,7 @@ public class ManagerController {
 
     // update Manager
     @PutMapping("/{id}")
-    public ResponseEntity<Manager> updateManager(@PathVariable UUID id, @RequestBody Manager managerData) {
+    public ResponseEntity<Manager> updateManager(@PathVariable Long id, @RequestBody Manager managerData) {
         // get manager if exists; else, throw exception
         Manager manager = managerRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Manager with id " + id + " does not exist."));

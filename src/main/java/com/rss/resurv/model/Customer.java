@@ -9,8 +9,7 @@ import java.util.*;
 @Table(name = "customers")
 public class Customer extends User {
 
-    // autoincrement Long primary key
-    @Column(nullable = false, name = "customer_id")
+    @Column(nullable = false, unique = true, name = "customer_id")
     private Long customerId;
 
     // Reservation foreign key (one customer, many reservations)

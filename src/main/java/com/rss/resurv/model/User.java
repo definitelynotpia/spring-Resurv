@@ -1,20 +1,12 @@
 package com.rss.resurv.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Inheritance;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.InheritanceType;
-import jakarta.persistence.Column;
+import jakarta.persistence.*;
 
-@Entity
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+@MappedSuperclass
 public class User {
 
     // autoincrement Long primary key
     @Id
-    @GeneratedValue(strategy = GenerationType.TABLE)
     private Long userId;
 
     // entity attributes

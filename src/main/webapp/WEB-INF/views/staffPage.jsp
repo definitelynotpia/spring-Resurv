@@ -20,19 +20,10 @@
                 <a class="blog-header-logo text-dark" href="#">ReSurv</a>
             </div>
             <div class="col-4 d-flex justify-content-end align-items-center">
-                <a class="btn btn-sm btn-outline-secondary" href="logout">Log out</a>
+                <a class="btn btn-sm btn-outline-secondary" href="staff_logout">Log out</a>
             </div>
         </div>
     </header>
-
-    <div class="nav-scroller py-1 mb-2">
-        <nav class="nav d-flex justify-content-between">
-            <a class="p-2 text-muted" href="home">Home</a>
-            <a class="p-2 text-dark" href="myReservations">Booking</a>
-            <a class="p-2 text-muted" href="#">History</a>
-            <a class="p-2 text-muted" href="#">Contact Us</a>
-        </nav>
-    </div>
 
     <div class="row d-flex justify-content-center align-items-center h-100">
         <div class="col col-xl-10">
@@ -55,7 +46,8 @@
                                 <c:forEach var="reservation" items="${reservations}">
                                     <tr>
                                         <td>${reservation.reservation_id}</td>
-                                        <td>${reservation.customer_id}</td>
+                                        <td>${reservation.customer.firstName}</td>
+                                        <td>${reservation.customer.lastName}</td>
                                         <td>${reservation.tableNo}</td>
                                         <td>${reservation.pax}</td>
                                         <td>${reservation.reservationTimestamp}</td>

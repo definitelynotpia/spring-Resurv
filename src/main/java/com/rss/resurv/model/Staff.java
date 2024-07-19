@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 
 
 @Entity
+@DiscriminatorValue("STAFF")
 @Table(name = "staffs")
 public class Staff extends User{
     // autoincrement Long primary key

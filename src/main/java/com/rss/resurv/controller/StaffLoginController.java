@@ -1,17 +1,19 @@
 package com.rss.resurv.controller;
 
-import com.rss.resurv.model.Customer;
 import com.rss.resurv.model.Staff;
 import com.rss.resurv.service.StaffLoginService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+
+import java.util.List;
 
 @Controller
 public class StaffLoginController {
@@ -24,8 +26,8 @@ public class StaffLoginController {
         return "staffLogin";
     }
 
-    @GetMapping("/staff_page")
-    public String staffHomePage(HttpSession session) {
+    @GetMapping("/staffHomePage")
+    public String staffHomePage(HttpSession session, Model model) {
         if(session.getAttribute("user_id") == null) {
             return "redirect:/staff_login";
         } else {

@@ -10,8 +10,11 @@ import java.util.List;
 @Service
 public class CustomerLoginService {
 
-    @Autowired
-    private CustomerRepository customerRepository;
+    private final CustomerRepository customerRepository;
+
+    public CustomerLoginService(CustomerRepository customerRepository) {
+        this.customerRepository = customerRepository;
+    }
 
     public String validateLogin(String email, String password) {
         List<Customer> customers = customerRepository.findByEmailAndPassword(email, password);

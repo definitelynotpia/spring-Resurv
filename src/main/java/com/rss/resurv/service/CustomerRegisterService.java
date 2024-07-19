@@ -8,8 +8,11 @@ import org.springframework.stereotype.Service;
 @Service
 public class CustomerRegisterService {
 
-    @Autowired
-    private CustomerRepository customerRepository;
+    private final CustomerRepository customerRepository;
+
+    public CustomerRegisterService(CustomerRepository customerRepository) {
+        this.customerRepository = customerRepository;
+    }
 
     public String CustomerRegister(Customer customer) {
         Customer userCustomer = new Customer();

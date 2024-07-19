@@ -10,14 +10,18 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class CustomerLoginController {
 
-    @Autowired
-    private CustomerLoginService customerLoginService;
+    private final CustomerLoginService customerLoginService;
+
+    public CustomerLoginController(CustomerLoginService customerLoginService) {
+        this.customerLoginService = customerLoginService;
+    }
 
     //Default Page
     @GetMapping("/")
-    public String loginPage() {
-        return "index";
-    }
+    public String loginPage() { return "index"; }
+
+    @GetMapping("/home")
+    public String homePage() { return "home"; }
 
     //Redirect to Customer Registration
     @RequestMapping(value = "registerPage", method = RequestMethod.POST)
@@ -35,19 +39,16 @@ public class CustomerLoginController {
     @PostMapping("/login")
 //    @RequestMapping(value = "login", method = RequestMethod.POST)
     public ModelAndView validateLogin(HttpServletRequest request) {
-
         ModelAndView modelAndView = new ModelAndView();
         String result = customerLoginService.validateLogin(request.getParameter("email"), request.getParameter("password"));
-        if (!result.equals("welcome")) {
-            modelAndView.setViewName("index");
-            modelAndView.addObject("message", result);
-            return modelAndView;
-        } else {
+
+        if (result.equals("welcome")) {
             modelAndView.setViewName("home");
-            modelAndView.addObject("message", result);
-            return modelAndView;
+        } else {
+            modelAndView.setViewName("index");
         }
 
-
+        modelAndView.addObject("message", result);
+        return modelAndView;
     }
 }

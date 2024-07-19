@@ -1,7 +1,9 @@
 package com.rss.resurv.controller;
 
+import com.rss.resurv.model.Customer;
 import com.rss.resurv.service.CustomerLoginService;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -10,18 +12,21 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class CustomerLoginController {
 
-    private final CustomerLoginService customerLoginService;
-
-    public CustomerLoginController(CustomerLoginService customerLoginService) {
-        this.customerLoginService = customerLoginService;
-    }
+    @Autowired
+    private CustomerLoginService customerLoginService;
 
     //Default Page
     @GetMapping("/")
     public String loginPage() { return "index"; }
 
     @GetMapping("/home")
-    public String homePage() { return "home"; }
+    public String homePage(HttpSession session, HttpServletRequest request) {
+        if(session.getAttribute("user_id") == null) {
+            return "redirect:/";
+        } else {
+            return "home";
+        }
+    }
 
     //Redirect to Customer Registration
     @RequestMapping(value = "registerPage", method = RequestMethod.POST)
@@ -35,20 +40,33 @@ public class CustomerLoginController {
         return "redirect:/";
     }
 
-//    Commented this out because its not working. Need to hardcode POST like this instead.
     @PostMapping("/login")
-//    @RequestMapping(value = "login", method = RequestMethod.POST)
-    public ModelAndView validateLogin(HttpServletRequest request) {
+    public ModelAndView validateLogin(HttpServletRequest request, HttpSession session) {
         ModelAndView modelAndView = new ModelAndView();
-        String result = customerLoginService.validateLogin(request.getParameter("email"), request.getParameter("password"));
 
+        String email = request.getParameter("email");
+        String password = request.getParameter("password");
+        String result = customerLoginService.validateLogin(email, password);
+
+//        String result = customerLoginService.validateLogin(request.getParameter("email"), request.getParameter("password"));
+        Customer customer = customerLoginService.findCustomerByEmail(email);
         if (result.equals("welcome")) {
-            modelAndView.setViewName("home");
+            session.setAttribute("user_id", customer.getUser_id());
+            modelAndView.setViewName("redirect:/home");
+            return modelAndView;
         } else {
-            modelAndView.setViewName("index");
+            modelAndView.setViewName("redirect:/");
+            return modelAndView;
         }
+    }
 
-        modelAndView.addObject("message", result);
-        return modelAndView;
+    @RequestMapping(value = "logout", method = RequestMethod.GET)
+    public String logout(HttpSession session) {
+        if(session.getAttribute("user_id") != null) {
+            session.invalidate();
+            return "redirect:/";
+        }
+        return "redirect:/home";
+
     }
 }

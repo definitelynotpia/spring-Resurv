@@ -3,12 +3,13 @@ package com.rss.resurv.model;
 import jakarta.persistence.*;
 
 @MappedSuperclass
+//@Inheritance(strategy = InheritanceType.JOINED)
 public class User {
 
     // autoincrement Long primary key
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long userId;
+    private Long user_id;
 
     // entity attributes
     @Column(nullable = false, length = 30, name = "firstName")
@@ -35,9 +36,9 @@ public class User {
     }
 
     // getters and setters
-    public Long getUserId() { return userId; }
+    public Long getUser_id() { return user_id; }
 
-    public void setUserId(Long userId) { this.userId = userId; }
+    public void setUser_id(Long userId) { this.user_id = userId; }
 
     public String getFirstName() {
         return firstName;

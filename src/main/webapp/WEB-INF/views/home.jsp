@@ -1,6 +1,13 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<% response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); %>
+<% response.setHeader("Pragma", "no-cache"); %>
+<% response.setHeader("Expires", "0"); %>
+
 <!DOCTYPE html>
 <html>
 <head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
     <title>Home Page</title>
 </head>
 <body>
@@ -13,15 +20,15 @@
                     <a class="blog-header-logo text-dark" href="#">ReSurv</a>
                 </div>
                 <div class="col-4 d-flex justify-content-end align-items-center">
-                    <a class="btn btn-sm btn-outline-secondary" href="#">Log out</a>
+                    <a class="btn btn-sm btn-outline-secondary" href="logout">Log out</a>
                 </div>
             </div>
         </header>
 
         <div class="nav-scroller py-1 mb-2">
             <nav class="nav d-flex justify-content-between">
-                <a class="p-2 text-dark" href="#">Home</a>
-                <a class="p-2 text-muted" href="#">Booking</a>
+                <a class="p-2 text-dark" href="home">Home</a>
+                <a class="p-2 text-muted" href="myReservations">Booking</a>
                 <a class="p-2 text-muted" href="#">History</a>
                 <a class="p-2 text-muted" href="#">Contact Us</a>
             </nav>

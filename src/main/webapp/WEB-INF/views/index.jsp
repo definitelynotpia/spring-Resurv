@@ -1,3 +1,7 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<% response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); %>
+<% response.setHeader("Pragma", "no-cache"); %>
+<% response.setHeader("Expires", "0"); %>
 
 <!DOCTYPE html>
 <html>
@@ -27,11 +31,11 @@
                                     <h5 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px;">Sign in to your account</h5>
 
                                     <div data-mdb-input-init class="form-outline mb-4">
-                                        <input type="email" id="email" class="form-control" />
+                                        <input type="email" id="email" name="email" class="form-control" />
                                         <label class="form-label" for="email">Email</label>
                                     </div>
                                     <div data-mdb-input-init class="form-outline mb-4">
-                                        <input type="password" id="password" class="form-control" />
+                                        <input type="password" id="password" name="password" class="form-control" />
                                         <label class="form-label" for="password">Password</label>
                                     </div>
 

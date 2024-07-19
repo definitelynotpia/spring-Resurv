@@ -1,35 +1,64 @@
 package com.rss.resurv.service;
 
 import com.rss.resurv.exception.ResourceNotFoundException;
+import com.rss.resurv.model.Customer;
 import com.rss.resurv.model.Reservation;
+import com.rss.resurv.repository.CustomerRepository;
 import com.rss.resurv.repository.ReservationRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
 
 @Service
 public class ReservationService {
 
-    private final ReservationRepository reservationRepository;
+    @Autowired
+    private ReservationRepository reservationRepository;
 
-    public ReservationService(ReservationRepository reservationRepository) {
-        this.reservationRepository = reservationRepository;
+    @Autowired
+    private CustomerRepository customerRepository;
+
+    public List<Reservation> findAllReservations(){
+        return reservationRepository.findAll();
     }
-
-    public Optional<Reservation> findById(Long id) {
+    public Optional<Reservation> findReservationById(Long id) {
         return reservationRepository.findById(id);
     }
 
-    public void updateReservation(Long id, Reservation reservationData) {
+    public Optional<Customer> findCustomerById(Long id) {
+        return customerRepository.findById(id);
+    }
+    
+
+    public Reservation saveReservation(Reservation reservation, Long customerId) {
+        Customer customer = customerRepository.findById(customerId)
+                .orElseThrow(() -> new IllegalArgumentException("Customer not found"));
+        Reservation newReservation = new Reservation();
+        newReservation.setTableNo(reservation.getTableNo());
+        newReservation.setCreationTimestamp(LocalDateTime.now());
+        newReservation.setCustomer(customer);
+        newReservation.setPax(reservation.getPax());
+        newReservation.setReservationTimestamp(reservation.getReservationTimestamp());
+
+        return reservationRepository.save(newReservation);
+    }
+
+    public Reservation updateReservation(Long id, Reservation reservation) {
         // get reservation if exists; else, throw exception
-        Reservation reservation = reservationRepository.findById(id)
+        Reservation updateReservation = reservationRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Reservation with id " + id + " does not exist."));
+
         // set reservation attributes
-        reservation.setTableNo(reservationData.getTableNo());
-        reservation.setCreationTimestamp(reservationData.getCreationTimestamp());
-        reservation.setReservationTimestamp(reservationData.getReservationTimestamp());
+        updateReservation.setTableNo(reservation.getTableNo());
+        updateReservation.setCreationTimestamp(LocalDateTime.now());
+        updateReservation.setPax(reservation.getPax());
+        updateReservation.setReservationTimestamp(reservation.getReservationTimestamp());
+
         // save changes to repository
-        reservationRepository.save(reservation);
+        return reservationRepository.save(updateReservation);
     }
 
     public void deleteById(Long id) {

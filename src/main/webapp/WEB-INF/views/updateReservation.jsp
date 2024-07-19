@@ -19,7 +19,7 @@
                 <a class="blog-header-logo text-dark" href="#">ReSurv</a>
             </div>
             <div class="col-4 d-flex justify-content-end align-items-center">
-                <a class="btn btn-sm btn-outline-secondary" href="#">Log out</a>
+                <a class="btn btn-sm btn-outline-secondary" href="logout">Log out</a>
             </div>
         </div>
     </header>
@@ -46,8 +46,8 @@
 
                             <h3>${errorMsg}</h3>
 
-                            <form class="px-md-2" action="reserve" method="POST">
-                                <div class="h1 fw-bold mb-3 pb-1">Reserve a table</div>
+                            <form class="px-md-2" action="/myReservations/edit/${id}" method="POST">
+                                <div class="h1 fw-bold mb-3 pb-1">Update my Reservation</div>
                                 <h2>${message}</h2>
                                 <div data-mdb-input-init class="form-outline mb-4">
                                     <input type="number" id="tableNo" name="tableNo" class="form-control" />

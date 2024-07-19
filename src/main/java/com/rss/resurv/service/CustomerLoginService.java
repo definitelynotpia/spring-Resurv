@@ -19,6 +19,6 @@ public class CustomerLoginService {
         if (customers.isEmpty()) {
             return "Invalid email or password";
         }
-        return "home";
+        return "welcome";
     }
 }

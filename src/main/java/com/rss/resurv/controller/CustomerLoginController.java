@@ -32,13 +32,22 @@ public class CustomerLoginController {
     }
 
 //    Commented this out because its not working. Need to hardcode POST like this instead.
-//    @PostMapping("/loginCheck")
-    @RequestMapping(value = "login", method = RequestMethod.POST)
+    @PostMapping("/login")
+//    @RequestMapping(value = "login", method = RequestMethod.POST)
     public ModelAndView validateLogin(HttpServletRequest request) {
-        String result = customerLoginService.validateLogin(request.getParameter("email"), request.getParameter("password"));
+
         ModelAndView modelAndView = new ModelAndView();
-        modelAndView.setViewName("home");
-        modelAndView.addObject("message", result);
-        return modelAndView;
+        String result = customerLoginService.validateLogin(request.getParameter("email"), request.getParameter("password"));
+        if (!result.equals("welcome")) {
+            modelAndView.setViewName("index");
+            modelAndView.addObject("message", result);
+            return modelAndView;
+        } else {
+            modelAndView.setViewName("home");
+            modelAndView.addObject("message", result);
+            return modelAndView;
+        }
+
+
     }
 }

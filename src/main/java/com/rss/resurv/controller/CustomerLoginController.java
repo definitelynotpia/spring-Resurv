@@ -20,7 +20,7 @@ public class CustomerLoginController {
     public String loginPage() { return "index"; }
 
     @GetMapping("/home")
-    public String homePage(HttpSession session, HttpServletRequest request) {
+    public String homePage(HttpSession session) {
         if(session.getAttribute("user_id") == null) {
             return "redirect:/";
         } else {
@@ -66,7 +66,7 @@ public class CustomerLoginController {
             session.invalidate();
             return "redirect:/";
         }
-        return "redirect:/home";
+        return "redirect:/";
 
     }
 }

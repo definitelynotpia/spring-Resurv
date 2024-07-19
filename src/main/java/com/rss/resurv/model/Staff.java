@@ -8,7 +8,7 @@ import jakarta.persistence.*;
 public class Staff extends User{
     // autoincrement Long primary key
 
-    @Column(nullable = false, unique = true, name = "staff_id")
+    @Column(unique = true, name = "staff_id")
     public Long staffId;
     // staff views, edits only
 

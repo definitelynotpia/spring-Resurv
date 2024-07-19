@@ -7,7 +7,7 @@ import jakarta.persistence.*;
 @Table(name = "managers")
 public class Manager extends User {
 
-    @Column(nullable = false,unique = true, name ="manager_id")
+    @Column(unique = true, name ="manager_id")
     public Long managerId;
     // can view, edit, delete
 

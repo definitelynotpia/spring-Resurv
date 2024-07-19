@@ -1,0 +1,11 @@
+.login-form{
+    width: 400px;
+    height: 400px;
+    position: absolute;
+    background-color: darkslateblue;
+    border-radius: 10px;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+}

@@ -32,7 +32,7 @@ public class CustomerLoginController {
     }
 
 //    Commented this out because its not working. Need to hardcode POST like this instead.
-    @PostMapping("/login")
+    @PostMapping("/home")
 //    @RequestMapping(value = "login", method = RequestMethod.POST)
     public ModelAndView validateLogin(HttpServletRequest request) {
 

@@ -23,62 +23,19 @@ public class ReservationController {
     @Autowired // customers
     private CustomerRepository customerRepository;
 
-    // get all Reservations
-    @GetMapping("")
-    public List<Reservation> getAllReservations() { return reservationRepository.findAll(); }
 
-    // get Reservations by id
-    @GetMapping("{id}")
-    public ResponseEntity<Reservation> getReservationById(@PathVariable Long id) {
-        // get reservation if exists; else, throw exception
-        Reservation reservation = reservationRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Reservation with id " + id + " does not exist."));
-        return ResponseEntity.ok(reservation);
-    }
 
-    // create new Reservation
-    @PostMapping("/ReSurv/reserve")
-    Reservation createReservation(@RequestBody Reservation reservation) { return reservationRepository.save(reservation); }
-
-    // delete existing Reservation
-    @DeleteMapping("{id}")
-    public ResponseEntity<Map<String, Boolean>> deleteReservation(@PathVariable Long id) {
-        // get reservation if exists; else, throw exception
-        Reservation reservation = reservationRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Reservation with id " + id + " does not exist."));
-        // delete reservation
-        reservationRepository.delete(reservation);
-        Map<String, Boolean> response = new HashMap<>();
-        response.put("deleted", Boolean.TRUE);
-        return ResponseEntity.ok(response);
-    }
-
-    // update Reservation
-    @PutMapping("/{id}")
-    public ResponseEntity<Reservation> updateReservation(@PathVariable Long id, @RequestBody Reservation reservationData) {
-        // get reservation if exists; else, throw exception
-        Reservation reservation = reservationRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Reservation with id " + id + " does not exist."));
-        // set reservation attributes
-        reservation.setTableNo(reservationData.getTableNo());
-        reservation.setCreationTimestamp(reservationData.getCreationTimestamp());
-        reservation.setReservationTimestamp(reservationData.getReservationTimestamp());
-        // save changes to repository
-        Reservation updatedReservation = reservationRepository.save(reservation);
-        return ResponseEntity.ok(updatedReservation);
-    }
-
-    // one-to-many relationship (one customer can have many reservations)
-    @PutMapping("/{customerId}/{reservationId}")
-    Reservation setCustomerToReservation(@PathVariable Long reservationId, @PathVariable Long customerId) {
-        // get reservation and customer objects, else if not exists, throw exceptions
-        Reservation reservation = reservationRepository.findById(reservationId)
-                .orElseThrow(() -> new ResourceNotFoundException("Reservation with id " + reservationId + " does not exist."));
-        Customer customer = customerRepository.findById(customerId)
-                .orElseThrow(() -> new ResourceNotFoundException("Customer with id " + customerId + " does not exist."));
-        // set customer attribute of reservation
-        reservation.setCustomer(customer);
-        // save changes to repository
-        return reservationRepository.save(reservation);
-    }
+//    // one-to-many relationship (one customer can have many reservations)
+//    @PutMapping("/{customerId}/{reservationId}")
+//    Reservation setCustomerToReservation(@PathVariable Long reservationId, @PathVariable Long customerId) {
+//        // get reservation and customer objects, else if not exists, throw exceptions
+//        Reservation reservation = reservationRepository.findById(reservationId)
+//                .orElseThrow(() -> new ResourceNotFoundException("Reservation with id " + reservationId + " does not exist."));
+//        Customer customer = customerRepository.findById(customerId)
+//                .orElseThrow(() -> new ResourceNotFoundException("Customer with id " + customerId + " does not exist."));
+//        // set customer attribute of reservation
+//        reservation.setCustomer(customer);
+//        // save changes to repository
+//        return reservationRepository.save(reservation);
+//    }
 }

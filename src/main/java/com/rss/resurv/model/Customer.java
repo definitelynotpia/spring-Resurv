@@ -9,7 +9,7 @@ import java.util.*;
 @Table(name = "customers")
 public class Customer extends User {
 
-    @Column(nullable = false, unique = true, name = "customer_id")
+    @Column(unique = true, name = "customer_id")
     private Long customerId;
 
     // Reservation foreign key (one customer, many reservations)

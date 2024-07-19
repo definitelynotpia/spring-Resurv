@@ -7,6 +7,7 @@ public class User {
 
     // autoincrement Long primary key
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long userId;
 
     // entity attributes
@@ -43,6 +44,7 @@ public class User {
     }
 
     public void setFirstName(String firstName) {
+
         this.firstName = firstName;
     }
 

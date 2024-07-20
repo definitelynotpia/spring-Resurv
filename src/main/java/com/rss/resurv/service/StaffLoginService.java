@@ -1,6 +1,5 @@
 package com.rss.resurv.service;
 
-import com.rss.resurv.model.Customer;
 import com.rss.resurv.model.Staff;
 import com.rss.resurv.repository.StaffRepository;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -37,7 +37,8 @@
                             <table border="2" width="70%" cellpadding="2">
                                 <tr>
                                     <th>Reference ID</th>
-                                    <th>Customer</th>
+                                    <th>First Name</th>
+                                    <th>Last Name</th>
                                     <th>Table No.</th>
                                     <th>Pax</th>
                                     <th>Date and Time</th>

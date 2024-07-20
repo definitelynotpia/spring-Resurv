@@ -10,11 +10,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import java.util.List;
 
 @Controller
-public class ReservationController {
+public class StaffReservationController {
 
     private final ReservationService reservationService;
 
-    public ReservationController(ReservationService reservationService) {
+    public StaffReservationController(ReservationService reservationService) {
         this.reservationService = reservationService;
     }
 
